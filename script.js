@@ -15304,14 +15304,27 @@ const targetWord = targetWords[Math.floor(dayOffset)]
 
 //localStorageのコード
 const storage = localStorage;
-let wordcount;
-if (!storage.getItem('word0')){
-  wordcount = 0;
+let wordstore1;
+let wordstore2;
+let wordstore3;
+let wordstore4;
+let wordstore5;
+if (!storage.getItem('word1')){
+  wordstore1 = 0;
 } else {
-  wordcount = storage.getItem('word0');
+  wordstore1 = storage.getItem('word1');
+  wordstore2 = storage.getItem('word2');
+  wordstore3 = storage.getItem('word3');
+  wordstore4 = storage.getItem('word4');
+  wordstore5 = storage.getItem('word5');
+  pressKey(wordstore1);
+  pressKey(wordstore2);
+  pressKey(wordstore3);
+  pressKey(wordstore4);
+  pressKey(wordstore5);
+  submitGuess();
 }
 
-storage.setItem('word0', wordcount);
 console.log(storage)
 
 //関数スタート
