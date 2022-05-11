@@ -15303,7 +15303,7 @@ const dayOffset = msOffset / 1000 / 60 / 60 / 24
 const targetWord = targetWords[Math.floor(dayOffset)]
 
 //localStorageのコード
-const storage = localStorage;
+const storage = sessionStorage;
 let wordstore1;
 let wordstore2;
 let wordstore3;
@@ -15335,7 +15335,7 @@ let wordstore28;
 let wordstore29;
 let wordstore30;
 if (!storage.getItem('word1')){
-  wordstore1 = 0;
+  wordstore1 = "";
 } else {
   wordstore1 = storage.getItem('word1');
   wordstore2 = storage.getItem('word2');
@@ -15351,7 +15351,7 @@ if (!storage.getItem('word1')){
 }
 
 if (!storage.getItem('word6')){
-  wordstore6 = 0;
+  wordstore6 = "";
 } else {
   setTimeout(function(){
     wordstore6 = storage.getItem('word6');
@@ -15369,7 +15369,7 @@ if (!storage.getItem('word6')){
 }
 
 if (!storage.getItem('word11')){
-  wordstore11 = 0;
+  wordstore11 = "";
 } else {
   setTimeout(function(){
     wordstore11 = storage.getItem('word11');
@@ -15386,7 +15386,7 @@ if (!storage.getItem('word11')){
   },4000)
 }
 if (!storage.getItem('word16')){
-  wordstore16 = 0;
+  wordstore16 = "";
 } else {
   setTimeout(function(){
     wordstore16 = storage.getItem('word16');
@@ -15404,7 +15404,7 @@ if (!storage.getItem('word16')){
 }
 
 if (!storage.getItem('word21')){
-  wordstore21 = 0;
+  wordstore21 = "";
 } else {
   setTimeout(function(){
     wordstore21 = storage.getItem('word21');
@@ -15422,7 +15422,7 @@ if (!storage.getItem('word21')){
 }
 
 if (!storage.getItem('word26')){
-  wordstore26 = 0;
+  wordstore26 = "";
 } else {
   setTimeout(function(){
     wordstore26 = storage.getItem('word26');
