@@ -15309,6 +15309,31 @@ let wordstore2;
 let wordstore3;
 let wordstore4;
 let wordstore5;
+let wordstore6;
+let wordstore7;
+let wordstore8;
+let wordstore9;
+let wordstore10;
+let wordstore11;
+let wordstore12;
+let wordstore13;
+let wordstore14;
+let wordstore15;
+let wordstore16;
+let wordstore17;
+let wordstore18;
+let wordstore19;
+let wordstore20;
+let wordstore21;
+let wordstore22;
+let wordstore23;
+let wordstore24;
+let wordstore25;
+let wordstore26;
+let wordstore27;
+let wordstore28;
+let wordstore29;
+let wordstore30;
 if (!storage.getItem('word1')){
   wordstore1 = 0;
 } else {
@@ -15323,6 +15348,95 @@ if (!storage.getItem('word1')){
   pressKey(wordstore4);
   pressKey(wordstore5);
   submitGuess();
+}
+
+if (!storage.getItem('word6')){
+  wordstore6 = 0;
+} else {
+  setTimeout(function(){
+    wordstore6 = storage.getItem('word6');
+    wordstore7 = storage.getItem('word7');
+    wordstore8 = storage.getItem('word8');
+    wordstore9 = storage.getItem('word9');
+    wordstore10 = storage.getItem('word10');
+    pressKey(wordstore6);
+    pressKey(wordstore7);
+    pressKey(wordstore8);
+    pressKey(wordstore9);
+    pressKey(wordstore10);
+    submitGuess();
+  },2000)
+}
+
+if (!storage.getItem('word11')){
+  wordstore11 = 0;
+} else {
+  setTimeout(function(){
+    wordstore11 = storage.getItem('word11');
+    wordstore12 = storage.getItem('word12');
+    wordstore13 = storage.getItem('word13');
+    wordstore14 = storage.getItem('word14');
+    wordstore15 = storage.getItem('word15');
+    pressKey(wordstore11);
+    pressKey(wordstore12);
+    pressKey(wordstore13);
+    pressKey(wordstore14);
+    pressKey(wordstore15);
+    submitGuess();
+  },4000)
+}
+if (!storage.getItem('word16')){
+  wordstore16 = 0;
+} else {
+  setTimeout(function(){
+    wordstore16 = storage.getItem('word16');
+    wordstore17 = storage.getItem('word17');
+    wordstore18 = storage.getItem('word18');
+    wordstore19 = storage.getItem('word19');
+    wordstore20 = storage.getItem('word20');
+    pressKey(wordstore16);
+    pressKey(wordstore17);
+    pressKey(wordstore18);
+    pressKey(wordstore19);
+    pressKey(wordstore20);
+    submitGuess();
+  },6000)
+}
+
+if (!storage.getItem('word21')){
+  wordstore21 = 0;
+} else {
+  setTimeout(function(){
+    wordstore21 = storage.getItem('word21');
+    wordstore22 = storage.getItem('word22');
+    wordstore23 = storage.getItem('word23');
+    wordstore24 = storage.getItem('word24');
+    wordstore25 = storage.getItem('word25');
+    pressKey(wordstore21);
+    pressKey(wordstore22);
+    pressKey(wordstore23);
+    pressKey(wordstore24);
+    pressKey(wordstore25);
+    submitGuess();
+  },8000)
+}
+
+if (!storage.getItem('word26')){
+  wordstore26 = 0;
+} else {
+  setTimeout(function(){
+    wordstore26 = storage.getItem('word26');
+    wordstore27 = storage.getItem('word27');
+    wordstore28 = storage.getItem('word28');
+    wordstore29 = storage.getItem('word29');
+    wordstore30 = storage.getItem('word30');
+    pressKey(wordstore26);
+    pressKey(wordstore27);
+    pressKey(wordstore28);
+    pressKey(wordstore29);
+    pressKey(wordstore30);
+    submitGuess();
+  },10000)
 }
 
 console.log(storage)
