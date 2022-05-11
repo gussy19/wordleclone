@@ -15302,27 +15302,32 @@ const targetWord = targetWords[Math.floor(dayOffset)]
 
 startInteraction()
 
+//入力開始
 function startInteraction() {
   document.addEventListener("click", handleMouseClick)
   document.addEventListener("keydown", handleKeyPress)
 }
 
+//入力終了(ゲーム終了)
 function stopInteraction() {
   document.removeEventListener("click", handleMouseClick)
   document.removeEventListener("keydown", handleKeyPress)
 }
 
+//マウス入力
 function handleMouseClick(e) {
+  // 文字入力
   if (e.target.matches("[data-key]")) {
     pressKey(e.target.dataset.key)
     return
   }
-
+  // 文字の確定
   if (e.target.matches("[data-enter]")) {
     submitGuess()
     return
   }
 
+  // 文字の削除
   if (e.target.matches("[data-delete]")) {
     deleteKey()
     return
@@ -15330,62 +15335,83 @@ function handleMouseClick(e) {
 }
 
 function handleKeyPress(e) {
+  // 文字の確定
   if (e.key === "Enter") {
     submitGuess()
     return
   }
-
+  // 文字の削除
   if (e.key === "Backspace" || e.key === "Delete") {
     deleteKey()
     return
   }
-
+  //文字の入力
   if (e.key.match(/^[a-z]$/)) {
     pressKey(e.key)
     return
   }
 }
 
+//文字の入力
 function pressKey(key) {
+  //入力欄
   const activeTiles = getActiveTiles()
+  // 決まった文字数以上は文字が打てない
   if (activeTiles.length >= WORD_LENGTH) return
+  //入力欄のうち入っていない部分
   const nextTile = guessGrid.querySelector(":not([data-letter])")
+  //toLowerCaseで小文字に変換 nextTileの属性でletterやstateを作成。
   nextTile.dataset.letter = key.toLowerCase()
   nextTile.textContent = key
   nextTile.dataset.state = "active"
 }
 
+// 文字の削除
 function deleteKey() {
   const activeTiles = getActiveTiles()
+  //最後の文字を指定
   const lastTile = activeTiles[activeTiles.length - 1]
+  // 一文字も入っていない場合は消せない
   if (lastTile == null) return
+  //文字の削除
   lastTile.textContent = ""
+  //文字のデータセット内の属性を削除
   delete lastTile.dataset.state
   delete lastTile.dataset.letter
 }
 
+// 文字の提出
+//localStorageに入れるなら、guessのところだと思う。
 function submitGuess() {
+  //文字列を取ってきて突っ込む
   const activeTiles = [...getActiveTiles()]
+  //文字数が足りてない場合の提出はアラートを表示
   if (activeTiles.length !== WORD_LENGTH) {
     showAlert("Not enough letters")
     shakeTiles(activeTiles)
     return
   }
 
+  // 提出した文字をguessと定義
   const guess = activeTiles.reduce((word, tile) => {
     return word + tile.dataset.letter
   }, "")
 
+  // guessがワードリストに載っていない場合はエラーメッセージ
   if (!dictionary.includes(guess)) {
     showAlert("Not in word list")
     shakeTiles(activeTiles)
     return
   }
 
+  // submitが終わったら文字を動かせない
   stopInteraction()
+  
+  // activeTilesについて全て反転させる
   activeTiles.forEach((...params) => flipTile(...params, guess))
 }
 
+// タイルを回転させて表示
 function flipTile(tile, index, array, guess) {
   const letter = tile.dataset.letter
   const key = keyboard.querySelector(`[data-key="${letter}"i]`)
@@ -15397,6 +15423,7 @@ function flipTile(tile, index, array, guess) {
     "transitionend",
     () => {
       tile.classList.remove("flip")
+      //それぞれの文字にクラスを使って色をつける
       if (targetWord[index] === letter) {
         tile.dataset.state = "correct"
         key.classList.add("correct")
@@ -15423,6 +15450,7 @@ function flipTile(tile, index, array, guess) {
   )
 }
 
+//文字の取得 data-state属性がactiveになっている文字を取ってくる。
 function getActiveTiles() {
   return guessGrid.querySelectorAll('[data-state="active"]')
 }
