@@ -15303,7 +15303,21 @@ const dayOffset = msOffset / 1000 / 60 / 60 / 24
 const targetWord = targetWords[Math.floor(dayOffset)]
 
 //localStorageのコード
-const storage = sessionStorage;
+const storage = localStorage;
+
+// 日毎にストレージをクリアする
+let setTime = new Date();
+let today = setTime.getDate()
+let lastPlaydate;
+if (!storage.getItem('day')){
+  storage.setItem('day', today);
+} else {
+  lastPlaydate = Number(storage.getItem('day'));
+  if (lastPlaydate != today) {
+    resetStorage()
+  }
+}
+
 let wordstore1;
 let wordstore2;
 let wordstore3;
@@ -15337,6 +15351,8 @@ let wordstore30;
 if (!storage.getItem('word1')){
   wordstore1 = "";
 } else {
+  //一度でも記入があったらその日のデータを記録する
+  // storage.setItem('day', today);
   wordstore1 = storage.getItem('word1');
   wordstore2 = storage.getItem('word2');
   wordstore3 = storage.getItem('word3');
@@ -15439,7 +15455,12 @@ if (!storage.getItem('word26')){
   },10000)
 }
 
-console.log(storage)
+//ストレージのクリア関数
+function resetStorage(){
+  storage.clear();
+  console.log("clicked")
+  location.reload()
+}
 
 //関数スタート
 startInteraction()
@@ -15553,7 +15574,7 @@ function submitGuess() {
   activeTiles.forEach((...params) => flipTile(...params, guess))
 }
 
-// 記録用のテスト
+// storage記録用のカウンター
 let counter = 0;
 
 // タイルを回転させて表示
@@ -15568,12 +15589,9 @@ function flipTile(tile, index, array, guess) {
     "transitionend",
     () => {
       tile.classList.remove("flip")
-      //記録用のテスト
+      //storage記録用
       counter++;
-      console.log(counter);
-      console.log(letter);
       storage.setItem(`word${counter}`, letter);
-      console.log(storage)
       
       //それぞれの文字にクラスを使って色をつける
       if (targetWord[index] === letter) {
