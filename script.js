@@ -15295,11 +15295,26 @@ const DANCE_ANIMATION_DURATION = 500
 const keyboard = document.querySelector("[data-keyboard]")
 const alertContainer = document.querySelector("[data-alert-container]")
 const guessGrid = document.querySelector("[data-guess-grid]")
+
+//日付ごとにお題が変更する設定
 const offsetFromDate = new Date(2022, 0, 1)
 const msOffset = Date.now() - offsetFromDate
 const dayOffset = msOffset / 1000 / 60 / 60 / 24
 const targetWord = targetWords[Math.floor(dayOffset)]
 
+//localStorageのコード
+const storage = localStorage;
+let wordcount;
+if (!storage.getItem('word0')){
+  wordcount = 0;
+} else {
+  wordcount = storage.getItem('word0');
+}
+
+storage.setItem('word0', wordcount);
+console.log(storage)
+
+//関数スタート
 startInteraction()
 
 //入力開始
@@ -15411,6 +15426,9 @@ function submitGuess() {
   activeTiles.forEach((...params) => flipTile(...params, guess))
 }
 
+// 記録用のテスト
+let counter = 0;
+
 // タイルを回転させて表示
 function flipTile(tile, index, array, guess) {
   const letter = tile.dataset.letter
@@ -15423,6 +15441,13 @@ function flipTile(tile, index, array, guess) {
     "transitionend",
     () => {
       tile.classList.remove("flip")
+      //記録用のテスト
+      counter++;
+      console.log(counter);
+      console.log(letter);
+      storage.setItem(`word${counter}`, letter);
+      console.log(storage)
+      
       //それぞれの文字にクラスを使って色をつける
       if (targetWord[index] === letter) {
         tile.dataset.state = "correct"
